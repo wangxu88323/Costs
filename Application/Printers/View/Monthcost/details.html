@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/Public/css/kube/css/kube.min.css"/>
+    <title>月度费用详情</title>
+</head>
+<body>
+<div class="unit-60 unit-centered">
+    <a href="/Printers/Costs/Monthcost">
+        <button class="btn btn-green btn-smaller btn-outline btn-round">返回首页</button>
+    </a>
+</div>
+<p></p>
+<div class="unit-60 unit-centered" style="margin-top: 20px;">
+    <h1>{$title}</h1>
+</div>
+<div class="unit-80 unit-centered">
+    <div class="units-row">
+        <div class="unit-40" style="font-size: 0.5em;">
+            <table class="table-hovered">
+                <thead>
+                <tr>
+                    <th>部门</th>
+                    <th>费用</th>
+                </tr>
+                </thead>
+                <tbody>
+                {$tbody_thisMonth}
+                </tbody>
+            </table>
+        </div>
+        <div class="unit-60">
+            <div id="main" style="height:450px;width: 800px;"></div>
+            <script src="/Public/js/echarts2_2/echarts.js"></script>
+            <script type="text/javascript">
+                require.config({
+                    paths: {
+                        echarts: '/Public/js/echarts2_2'
+                    }
+                });
+                require(
+                        [
+                            'echarts',
+                            'echarts/chart/pie' // 按需加载
+                        ],
+                        function (ec) {
+                            // 基于准备好的dom，初始化echarts图表
+                            var myChart = ec.init(document.getElementById('main'));
+
+                            var option = {
+                                title : {
+                                    text: '耗材费用',
+                                    subtext: {$subtext},
+                                    x:'center'
+                                },
+                                tooltip : {
+                                    trigger: 'item',
+                                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                                },
+                                legend: {
+                                    show:false,
+                                    orient : 'vertical',
+                                    x : 'left',
+                                    data:[{$legend}]
+                                },
+                                toolbox: {
+                                    show : true,
+                                    feature : {
+                                        mark : {show: false},
+                                        dataView : {show: false, readOnly: true},
+                                        magicType : {
+                                            show: false
+                                        },
+                                        restore : {show: false},
+                                        saveAsImage : {show: true}
+                                    }
+                                },
+                                calculable : false,
+                                series : [
+                                    {
+                                        name:'耗材费用',
+                                        type:'pie',
+                                        radius : '55%',
+                                        center: ['50%', '60%'],
+                                        data:[
+                                            {$data}
+                                        ]
+                                    }
+                                ]
+                            };
+
+                            // 为echarts对象加载数据
+                            myChart.setOption(option);
+                        }
+                );
+            </script>
+        </div>
+    </div>
+</div>
+</body>
+</html>

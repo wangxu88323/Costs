@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+    <script src="/Public/js/jquery.min.js"></script>
+    <script src="/Public/js/Chart.min.js"></script>
+    <script>
+        $(function () {
+            var ctx = $("#myChart").get(0).getContext("2d");
+
+            var data = {
+                labels : [{$line.label}],
+            datasets : [
+                {
+                    label: "My Second dataset",
+                    fillColor : "rgba(151,187,205,0.2)",
+                    strokeColor : "rgba(151,187,205,1)",
+                    pointColor : "rgba(151,187,205,1)",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(151,187,205,1)",
+                    data :[{$line.data}]
+        }
+        ]
+
+        }
+
+        var myNewChart = new Chart(ctx).Line(data, {
+            responsive: true
+        });
+
+        });
+    </script>
+</head>
+<body>
+<div class="container" style="margin:10px auto 10px ">
+    <a href="/Home/T/index.html"><span class="glyphicon glyphicon-circle-arrow-left" style="font-size: 5em;color:#357ebd"></span></a>
+</div>
+<div style="width: 1100px;height: 400px;margin:0 auto;">
+    <canvas id="myChart" width="1100" height="400" style="width: 1100px;height: 400px"></canvas>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>产品</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/css/nav.css" />
+    <script src="/Public/js/jquery.min.js"></script>
+    <script src="/Public/js/stickUp.min.js"></script>
+    <script src="/Public/js/productsIndexindex.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            <div style="margin-top: 200px"></div>
+            <div class="navbar-wrapper" id="nav" style="margin-top: 30px">
+                <ul class="nav">
+                    {$nav}
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <volist name="products" id="vo1">
+                <div class="col-lg-4">
+                    <div class="thumbnail">
+                        <img src="{$vo1.url}">
+                        <div class="caption">
+                            <h3>{$vo1.mc}</h3><h4>{$vo1.tym}</h4>
+                            <p>{$vo1.about}</p>
+                            <p><a href="{$vo1.href}" class="btn btn-primary" role="button">详情</a></p>
+                        </div>
+                    </div>
+                </div>
+            </volist>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <hr />
+        <div style="text-align: center;height: 50px;">
+            &copy; 王旭 Huamin,NCPC 冀ICP备XXXXXXXXX
+        </div>
+    </div>
+</footer>
+</body>
+</html>

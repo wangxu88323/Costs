@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/Public/css/kube/css/kube.min.css" />
+    <script src="/Public/js/jquery.min.js"></script>
+    <script src="/Public/js/Chart.min.js"></script>
+    <script>
+        $(function(){
+            var ctx = $("#myChart").get(0).getContext("2d");
+            var options = {
+                barValueSpacing : 15
+            };
+            var data = {
+                labels : ["生产支持部","设备工程部","安全管理部","综合部","QA","QC","财务部","物流采购部","201车间","202车间","204车间","205车间","研发中心","营销中心","研发部","复印机"],
+                datasets : [
+                    {
+                        fillColor : "rgba(151,187,205,0.5)",
+                        strokeColor : "rgba(151,187,205,1)",
+                        data : [1,1,1,4,5,25,4,7,15,10,6,6,7,23,1,6]
+                    }
+                ]
+            };
+            new Chart(ctx).Bar(data, options);
+        });
+    </script>
+    <title></title>
+</head>
+<body>
+<div style="max-width: 1200px;margin: 10px auto 20px;">
+    <h1>打印机统计</h1>
+    <div class="units-row">
+        <div class="unit-33">
+            <div style="width: 200px;height: 30px;margin: 0 auto;text-align: center;font-size: 20px;font-weight: bold;color: #b3b6b7;">打印机总数</div>
+            <div style="width: 200px;height: 200px;border: 20px solid #2575ed;border-radius: 200px;margin: 0 auto;text-align: center;line-height: 160px;font-size: 80px;">{$p.total}</div>
+        </div>
+        <div class="unit-33">
+            <div style="width: 200px;height: 30px;margin: 0 auto;text-align: center;font-size: 20px;font-weight: bold;color: #b3b6b7;">打印机种类</div>
+            <div style="width: 200px;height: 200px;border: 20px solid #de2c3b;border-radius: 200px;margin: 0 auto;text-align: center;line-height: 160px;font-size: 80px;">{$p.cate_num}</div>
+        </div>
+        <div class="unit-33">
+            <div style="width: 200px;height: 30px;margin: 0 auto;text-align: center;font-size: 20px;font-weight: bold;color: #b3b6b7;">打印机耗材种类</div>
+            <div style="width: 200px;height: 200px;border: 20px solid #ffc800;border-radius: 200px;margin: 0 auto;text-align: center;line-height: 160px;font-size: 80px;">{$p.spl_num}</div>
+        </div>
+    </div>
+    <!--<p>
+        <volist name="p.all_cate" id="cate">
+            {$cate}&nbsp;/&nbsp;
+        </volist>
+    </p>
+    <br />
+    <p>
+        <volist name="p.all_spl" id="spl">
+            {$spl}&nbsp;/&nbsp;
+        </volist>
+    </p>-->
+    <hr />
+    <h2>各部门打印机数量</h2>
+    <div style="width: 1000px;margin: 0 auto;">
+        <canvas id="myChart" width="1000" height="400"></canvas>
+    </div>
+</div>
+</body>
+</html>

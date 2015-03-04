@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+    <style type="text/css">
+        .col-lg-3{
+            border: 1px dashed #00cccc;
+            padding: 10px 3px;
+        }
+        .col-lg-3:hover{
+            background-color: #00cccc;
+            color: white;
+        }
+        .col-lg-3 .sn{
+            font-size: 50px;
+            line-height: 55px;
+            letter-spacing: 5px;
+            text-align: center;
+        }
+        .col-lg-3 .supplies{
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>打印机信息</h1>
+    </div>
+</header>
+<div class="container-fluid">
+
+<volist name="allPrinters" id="vo">
+    <div class="col-lg-3">
+        <p class="model">{$vo.model}</p>
+        <p style="position: relative;float: right;top:-30px;font-weight: bold;color: #356635">{$vo.dept}</p>
+
+        <p class="sn">{$vo.sn}</p>
+        <p class="supplies">{$vo.supplies}</p>
+    </div>
+</volist>
+
+
+
+</div>
+<footer>
+    <div class="container">
+        <hr />
+        新制剂工厂·生产支持部 &copy; 王旭 2014
+    </div>
+</footer>
+</body>
+</html>

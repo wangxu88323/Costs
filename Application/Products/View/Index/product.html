@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>{$mc}详细信息</title>
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+    <script src="/Public/js/jquery.min.js"></script>
+    <script src="/Public/css/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/Public/js/ProductsIndexProduct.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Public/css/ProductsIndexProduct.min.css" />
+</head>
+<body>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="/Products">产品首页</a></li>
+        <li><a href="{$cidhref}">{$cid.cname}</a></li>
+        <li class="active">{$mc}</li>
+    </ol>
+    <p style="margin:10px auto 10px"><img src="{$pics}" title="NCPC" /></p>
+    <h1 class="sp">{$spm}<sup>&reg;</sup></h1>
+    <h3 class="ty">{$tym}</h3>
+</div>
+<div class="container">
+    <ul class="nav nav-tabs" role="tablist" id="myTab">
+        <li class="active"><a href="#home" role="tab" data-toggle="tab">产品信息</a></li>
+        <li><a href="#profile" role="tab" data-toggle="tab">产品优势</a></li>
+        <li><a href="#messages" role="tab" data-toggle="tab">说明书</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="home">
+            <br />
+            <span class="label label-info">适应症</span>
+            <br />
+            {$desc[0].syz}
+            <br />
+            <span class="label label-info">规格</span>
+            <br />
+            {$desc[0].gg}
+        </div>
+        <div class="tab-pane" id="profile">
+            <br />
+            <span class="label label-info">产品优势</span>
+            <br />
+            {$desc[0].adv}
+        </div>
+        <div class="tab-pane" id="messages">
+            <br />
+            {$spec[0].sms}
+            <br />
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container" style="text-align: center;">
+        <hr />
+        <img src="/Public/images/ncpclogo.png" />
+    </div>
+</footer>
+</body>
+</html>

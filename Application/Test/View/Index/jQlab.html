@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+    </style>
+    <script src="/Public/js/jquery.min.js"></script>
+    <script>
+        function getWindowWidth(){
+            return ( $(window).width() / 2 - 50 ) + "px";
+        }
+        $(function () {
+            $("#g").click(function(){
+                $(this).animate({left:'250px'},function(){
+                    $(this).fadeOut();
+                });
+            });
+            $("#test").click(function(){
+                $(this).clone().css({"position":"absolute",'background-color':'blue'}).insertAfter(this).animate({'left':getWindowWidth()},function(){
+                    $(this).fadeOut(function(){
+                        $(this).remove();
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<p></p>
+<div id="test" style="width: 100px;height: 100px;background-color: #cc00ff;position:relative;"></div>
+<div id="g" style="background:#98bf21;height:100px;width:100px;position:relative;"></div>
+</body>
+</html>
