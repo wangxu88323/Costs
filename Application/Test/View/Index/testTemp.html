@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/css/signin.css" />
+    <script src="/Public/js/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('#submitButton').click(function(){
+                if($('#temp').val() == ""){
+                    $('#submitButton').addClass('btn-warning').html('<b>有空项</b>');
+                    setTimeout("$('#submitButton').removeClass('btn-warning').html('记录');",1500);
+                } else {
+                    $.ajax({
+                        url:'/Test/Index/testRecordTemp',
+                        type:'POST',
+                        data:{
+                            "temp":$("#temp").val()
+                        },
+                        dataType:'json',
+                        success:function(data){
+                            $('#temp').val('');
+                            $('#submitButton').addClass('btn-success').html('<b>已记录</b>');
+                            setTimeout("$('#submitButton').removeClass('btn-success').html('记录');",1500);
+                        },
+                        error:function(){
+                            $('#submitButton').addClass('btn-danger').html('<b>记录失败</b>');
+                            setTimeout("$('#submitButton').removeClass('btn-danger').html('记录');",1500);
+                        }
+                    });
+                }
+            });
+            //alert((new Date()).Format("hh:mm:ss"));
+            //setInterval("$('#time').html((new Date()).Format('hh:mm:ss'))",1000);
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+
+    <form class="form-signin" role="form" onsubmit="return false;">
+        <h2 class="form-signin-heading">请输入</h2>
+        <div class="form-group">
+            <div class="input-group">
+                <input class="form-control" type="text" id="temp" placeholder="摄氏度" required="" autofocus="">
+                <div class="input-group-addon">℃</div>
+            </div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="submitButton">记录</button>
+    </form>
+
+</div>
+</body>
+</html>

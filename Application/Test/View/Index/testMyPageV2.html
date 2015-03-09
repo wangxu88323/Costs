@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>testMyPageV2</title>
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+    <style>
+        ul.pagination li a.slh{
+            position: relative;
+            padding-top: 12px;
+            padding-bottom: 0;
+            border-top: 0;
+            border-right: 0;
+            border-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<ul class="pagination">
+    <li class="disabled"><a href="#">&laquo;</a></li>
+    <li><a class="slh" href="#">...</a></li>
+    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">&raquo;</a></li>
+</ul>
+<hr />
+<volist name="content" id="vo">
+    {$vo.id}->{$vo.content}<br />
+</volist>
+<hr />
+{$ul}
+</body>
+</html>

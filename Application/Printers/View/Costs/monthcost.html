@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/Public/css/kube/css/kube.min.css"/>
+    <title>月度费用</title>
+    <style>
+        body{
+            font-family: 微软雅黑;;
+        }
+        .cost{
+            font-size: 60px;
+            line-height: 100px;
+            color: darkgray;
+        }
+        .title{
+            height: 100px;
+            padding: 50px 0 100px;
+            box-sizing: border-box;
+        }
+        .navbar a:hover{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="title">
+        <div class="units-row">
+            <div class="unit-centered unit-50 units-padding">
+                <h1>耗材费用分摊系统</h1>
+            </div>
+        </div>
+    </div>
+    <div class="units-row">
+        <div class="unit-centered unit-50 units-padding">
+            <nav class="navbar fullwidth">
+                <li>
+                    <a href="/Printers/Costs">首页</a>
+                </li>
+                <li class="active">
+                    <a href="javascript:;">月度费用</a>
+                </li>
+                <li>
+                    <a href="javascript:;">数据分析</a>
+                </li>
+                <li>
+                    <a href="javascript:;">过往数据</a>
+                </li>
+                <li>
+                    <a href="/Printers/Costs/admin">结算</a>
+                </li>
+                <li>
+                    <a href="javascript:;">查询</a>
+                </li>
+                <li>
+                    <a href="/Printers/Costs/bills">领用记录</a>
+                </li>
+                <li>
+                    <a href="javascript:;">关于</a>
+                </li>
+            </nav>
+        </div>
+    </div>
+</header>
+<hr />
+<div class="unit-centered unit-80">
+        {$output}
+</div>
+</body>
+</html>

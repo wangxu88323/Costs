@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/Public/css/kube/css/kube.min.css"/>
+    <style>
+        body{
+            font-family: 微软雅黑;
+        }
+    </style>
+    <title>领用记录</title>
+</head>
+<body>
+<div class="units-row unit-centered unit-80">
+    <br />
+    <a href="/Printers/Costs">
+        <button class="btn btn-green btn-smaller btn-outline btn-round">返回首页</button>
+    </a>
+    <table class="table-hovered">
+        <thead>
+        <tr>
+            <th>纸质单号</th>
+            <th>打印机编号</th>
+            <th>部门</th>
+            <th>规格</th>
+            <th>数量</th>
+            <th>日期</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="content" id="vo1">
+            <tr style="text-align: center;">
+                <td class="width-10">{$vo1.bid}</td>
+                <td>{$vo1.sn}</td>
+                <td>{$vo1.dept}</td>
+                <td>{$vo1.model}</td>
+                <td class="width-10">{$vo1.amount}</td>
+                <td>{$vo1.time}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <div>{$ul}</div>
+</div>
+</body>
+</html>

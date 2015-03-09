@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+<!--
+{$count}<br />
+<ul class="pagination">
+    <li class="disabled"><a href="#">&laquo;</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">&raquo;</a></li>
+</ul>
+<hr />
+<ul class="pagination">
+    <li class="disabled"><a href="#">&laquo;</a></li>
+<for start="1" end="$count+1">
+    <li><a href="#">{$i}</a></li>
+</for>
+    <li><a href="#">&raquo;</a></li>
+</ul>
+
+<hr />
+-->
+
+<div class="container">
+    <div class="row" style="padding: 10px 10px;">
+        <volist name="content" id="vo">
+            <!--<div class="col-lg-3" style="height: 100px;background-color: darkgray;text-align: center;">
+
+            </div>-->
+            <div class="col-lg-2">
+                <div class="thumbnail">
+                    <img src="/Public/images/300X300.jpg">
+
+                    <div class="caption">
+                        <h3>{$vo.id}</h3>
+
+                        <p>{$vo.content}</p>
+
+                        <p><a href="javascript:;" class="btn btn-primary" role="button">详情</a></p>
+                    </div>
+                </div>
+            </div>
+        </volist>
+    </div>
+    <div style="text-align: center;">
+        <ul class="pagination">
+            <li {$first}><a href="{$prevUrl}">&laquo;</a></li>
+            <for start="1" end="$count+1">
+                <li <eq name="pagenum" value="$i">class="active"</eq>><a href="<eq name='pagenum' value='$i'>javascript:;<else/>{$url}?page={$i}</eq>">{$i}</a></li>
+            </for>
+            <li {$last}><a href="{$nextUrl}">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

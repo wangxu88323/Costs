@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>showIpLog</title>
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+    <link rel="shortcut icon"  type="image/x-icon" href="/Public/images/favicon.ico" />
+    <style>
+        ul.pagination li a.slh{
+            position: relative;
+            padding-top: 12px;
+            padding-bottom: 0;
+            border-top: 0;
+            border-right: 0;
+            border-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>ip</th>
+            <th>浏览内容</th>
+            <th>访问时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="content" id="vo1">
+            <tr>
+                <td>{$i}</td>
+                <td>{$vo1.ip}</td>
+                <td>{$vo1.url}</td>
+                <td>{$vo1.logtime}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <div style="text-align: center;">{$ul}</div>
+</div>
+</body>
+</html>

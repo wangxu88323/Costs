@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="/Public/js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+    <script>
+        $(function(){
+            $('button').click(function(){
+                if( this.innerHTML == '说明书'){
+                    this.innerHTML = '隐藏';
+                    $('#sms').addClass('dh');
+                } else {
+                    this.innerHTML = '说明书';
+                    $('#sms').removeClass('dh')
+                }
+            });
+        });
+    </script>
+    <style>
+        .dh{
+            -webkit-animation:dh1 1s ease-in;
+            -webkit-animation-fill-mode: forwards;
+        }
+        @-webkit-keyframes dh1{
+            0%{ -webkit-transform:translate(0);opacity:0.5; }
+            100%{ -webkit-transform:translate(500px);opacity:1; }
+        }
+    </style>
+</head>
+<body>
+<button type="button" class="btn btn-primary">说明书</button>
+<div id="sms" style="background-color: rgba(100,100,100,0.3);height: 500px;width: 500px;margin: 0 -500px 0"></div>
+</body>
+</html>

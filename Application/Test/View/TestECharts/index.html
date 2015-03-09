@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/Public/css/kube/css/kube.min.css"/>
+    <title></title>
+</head>
+<body>
+<p></p>
+<div class="unit-50 unit-centered">
+    <div id="main" style="height:600px;width: 800px;"></div>
+</div>
+
+<script src="/Public/js/echarts2_2/echarts.js"></script>
+<script type="text/javascript">
+    require.config({
+        paths: {
+            echarts: '/Public/js/echarts2_2'
+        }
+    });
+    require(
+            [
+                'echarts',
+                'echarts/chart/pie' // 按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main'));
+
+                var option = {
+                    title : {
+                        text: '耗材费用',
+                        subtext: '2015 年 1 月',
+                        x:'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        show:false,
+                        orient : 'vertical',
+                        x : 'left',
+                        data:[{$legend}]
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: false},
+                            dataView : {show: false, readOnly: true},
+                            magicType : {
+                                show: false
+                            },
+                            restore : {show: false},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : false,
+                    series : [
+                        {
+                            name:'耗材费用',
+                            type:'pie',
+                            radius : '55%',
+                            center: ['50%', '60%'],
+                            data:[
+                                {$data}
+                            ]
+                        }
+                    ]
+                };
+
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+            }
+    );
+</script>
+</body>
+</html>

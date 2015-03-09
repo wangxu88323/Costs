@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/Public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/Public/js/dateformat.js"></script>
+    <script>
+        $(function(){
+            $('#submitButton').click(function(){
+                if($('#bookname').val() == "" || $('#pagenumber').val() == "" || $('#summary').val() == ""){
+                    $('#submitButton').addClass('btn-warning').html('<b>有空项</b>');
+                    setTimeout("$('#submitButton').removeClass('btn-warning').html('记录');",1500);
+                } else {
+                    $.ajax({
+                        url:'/Emarks/Index/addMark',
+                        type:'POST',
+                        data:{
+                            "bookname":$("#bookname").val(),
+                            "pagenumber":$("#pagenumber").val(),
+                            "summary":$("#summary").val()
+                        },
+                        dataType:'json',
+                        success:function(data){
+                            $('#bookname').val('');
+                            $('#pagenumber').val('');
+                            $('#summary').val('');
+                            $('#submitButton').addClass('btn-success').html('<b>已记录</b>');
+                            setTimeout("$('#submitButton').removeClass('btn-success').html('记录');",1500);
+                        },
+                        error:function(){
+                            $('#submitButton').addClass('btn-danger').html('<b>记录失败</b>');
+                            setTimeout("$('#submitButton').removeClass('btn-danger').html('记录');",1500);
+                        }
+                    });
+                }
+            });
+            //alert((new Date()).Format("hh:mm:ss"));
+            setInterval("$('#time').html((new Date()).Format('hh:mm:ss'))",1000);
+        });
+    </script>
+    <style>
+        .wx-mark{
+            margin: 20px 0;
+            padding: 20px 0;
+            border-bottom: 1px solid darkgray;
+        }
+        .wx-mark .bookname{
+            font-size: 15px;
+        }
+        .wx-mark .wx-markcontent{
+            margin-top: 5px;
+            height: 55px;
+        }
+        .wx-mark .wx-markcontent .pagenumber{
+            color: #cccccc;
+            font-size: 50px;
+            line-height: 55px;
+            float: left;
+        }
+        .wx-mark .wx-markcontent .summary{
+            margin: 30px 30px 0;
+            padding-bottom: 0;
+            font-size: 20px;
+            line-height: 20px;
+            float: left;
+        }
+        .wx-mark .wx-markcontent .time{
+            margin: 30px 30px 0;
+            padding-bottom: 0;
+            color: grey;
+            font-size: 15px;
+            line-height: 20px;
+            float: right;
+        }
+        .setEmarks{
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>{$date} <small id="time"></small></h1>
+        <hr />
+    </div>
+</header>
+
+<div class="Emarks">
+    <div class="container">
+        <volist name="content" id="vo">
+            <div class="wx-mark">
+                <div class="bookname">《{$vo.bookname}》</div>
+                <div class="wx-markcontent">
+                    <div class="pagenumber">P{$vo.pagenumber}</div>
+                    <div class="summary">{$vo.summary}</div>
+                    <div class="time">{$vo.addtime}</div>
+                </div>
+            </div>
+        </volist>
+    </div>
+</div>
+<div style="text-align: center;">{$ul}</div>
+<div class="setEmarks">
+    <div class="container">
+        <form class="form-inline" role="form" onsubmit="return false">
+            <div class="form-group">
+                <label class="sr-only" for="bookname">Book Name</label>
+                <input type="text" class="form-control" id="bookname" name="bookname" placeholder="书名">
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">P</div>
+                    <input class="form-control" type="number" id="pagenumber" name="pagenumber" placeholder="页数">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="summary">Summary</label>
+                <input type="text" class="form-control" id="summary" name="summary" placeholder="摘要">
+            </div>
+            <!--<div class="checkbox">
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+            </div>-->
+            <button id="submitButton" class="btn btn-default">记录</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
