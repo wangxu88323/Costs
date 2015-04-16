@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/Public/css/kube/css/kube.min.css"/>
+    <style>
+        table{
+            font-family: 微软雅黑;
+        }
+        .right-contents{
+            min-width: 200px;
+            max-height: 600px;;
+        }
+        .info{
+            position: relative;
+            margin: 225px 0;
+            line-height: 50px;
+            font-size: 40px;
+        }
+    </style>
+    <script src="/Public/js/jquery-1.11.2.min.js"></script>
+    <title>打印机数据</title>
+</head>
+<body>
+<p></p>
+
+<div class="units-row">
+    <div class="unit-50">
+        <div id="main" style="height:600px;width: 800px;"></div>
+    </div>
+    <div class="unit-50">
+        <div id="contents" class="right-contents"></div>
+    </div>
+</div>
+<script src="/Public/js/echarts2_2/echarts.js"></script>
+<script type="text/javascript">
+    require.config({
+        paths: {
+            echarts: '/Public/js/echarts2_2'
+        }
+    });
+    function getDetails(params){
+        //点击条目后具体业务逻辑
+        var dept = params.name;
+        var count = '';
+        $.ajax({
+            type: "POST",
+            url: "/Printers/AllPrinters/getDeptPrinters",
+            data: "dept="+dept,
+            beforeSend: function () {
+                $('#contents').empty().append('<div class="info">等待数据...</div>');
+            },
+            success: function(msg){
+                $.each(msg.printers, function(i, item){
+                    count += "<tr><td>" + item.sn +"</td><td>" + item.model + "</td><td>" + item.supplies + "</td></tr>";
+                });
+                count = ("<h3>"+msg.dept+"打印机编号</h3><table class='table-hovered'><thead><tr><th>编号</th><th>型号</th><th>耗材</th></tr></thead>" + count + "</table>");
+                $('#contents').empty().append(count);
+            },
+            error : function(msg){
+                alert("error");
+            }
+        });
+    }
+    require([
+        'echarts',
+        'echarts/chart/bar' // 按需加载
+    ],
+    function(ec){
+        var myChart = ec.init(document.getElementById('main'), 'macarons');
+        option = {
+            title : {
+                text: '打印机数量',
+                subtext: '新制剂分厂'
+            },
+            tooltip : {
+                axisPointer : {
+                    type: 'none'
+                },
+                trigger: 'axis',
+                formatter: "{b} : {c}台"
+            },
+            legend: {
+                data:['打印机']
+            },
+            toolbox: {
+                show : false,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : false,
+            xAxis : [
+                {
+                    type : 'value',
+                    axisLine : {
+                        //show : false
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'category',
+                    data : [{$yAxis}]
+                }
+            ],
+            series : [
+                {
+                    name:'打印机',
+                    type:'bar',
+                    data:[{$xAxis}],
+                    barWidth : 15
+                }
+            ]
+        };
+        myChart.setOption(option);
+        var ecConfig = require('echarts/config');
+        myChart.on(ecConfig.EVENT.CLICK, getDetails);
+    });
+</script>
+</body>
+</html>
