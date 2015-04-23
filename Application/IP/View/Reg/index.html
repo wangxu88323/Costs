@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/Public/css/kube/css/kube.min.css"/>
+    <script src="/Public/js/jquery-1.11.2.min.js"></script>
+    <script>
+        $(function(){
+            $('#submit_btn').click(function(){
+                var name = $('#user-name').val();
+                var dept = $('#dept').val();
+                //alert(name + dept);
+                if(name=='' || dept==0 || dept =='0'){
+                    $('#submit_btn').addClass('btn-red').removeClass('btn-blue').html("姓名及部门不得为空");
+                    setTimeout(function(){$('#submit_btn').addClass('btn-blue').removeClass('btn-red').html('登记')},2000);
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/IP/Reg/reg",//TODO
+                        data: "dept="+dept+"&name="+name,
+                        beforeSend: function () {
+                            $('#submit_btn').addClass('btn-disabled btn-outline').removeClass('btn-blue').html("正在登记,请稍候...");
+                        },
+                        success: function(msg){
+                            if(msg.flag == 1){
+                                $('#user-name').val("");
+                                $('#dept').val(0);
+                                $('#submit_btn').addClass('btn-green').removeClass('btn-disabled btn-outline').html(msg.msg);
+                                setTimeout(function(){$('#submit_btn').addClass('btn-blue').removeClass('btn-green').html('登记')},5000);
+                            } else {
+                                $('#submit_btn').addClass('btn-red').removeClass('btn-disabled btn-outline').html(msg.msg);
+                                setTimeout(function(){$('#submit_btn').addClass('btn-blue').removeClass('btn-red').html('登记')},5000);
+                            }
+                        },
+                        error : function(){
+                            alert("error");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <title>登记使用IP</title>
+    <style>
+        .container{
+            font-family: 微软雅黑;
+            width: 500px;
+            margin: 0 auto;;
+        }
+        .content{
+            margin: 50px auto;
+            width: 300px;
+        }
+        .foot{
+            margin-top: 100px;
+            color: #CCCCCC;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <h1>登记IP</h1>
+        <form class="forms" onsubmit="return false;">
+            <label>
+                <input type="text" id="user-name" name="user-name" placeholder="姓名" class="width-100"/>
+            </label>
+            <label>
+                <select class="width-100" id="dept">
+                    <option value="0">部门</option>
+                    {$options}
+                </select>
+            </label>
+            <p>
+                <button id="submit_btn" class="btn btn-blue width-100">登记</button>
+            </p>
+        </form>
+    </div>
+    <footer class="foot">
+        <hr />
+        <span class="label label-outline label-blue">beta</span> &copy; 王旭 2015
+    </footer>
+</div>
+</body>
+</html>
